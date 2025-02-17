@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SanyamStore - Your Shopping Destination</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* General Styles for Amazon-like theme */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #F8F8F8;
+      margin: 0;
+      padding: 0;
+      color: #232F3E; /* Dark Gray */
+    }
+
+    header {
+      background-color: #232F3E; /* Dark Gray */
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header .logo a {
+      color: #FF9900; /* Amazon Yellow */
+      font-size: 24px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    header nav ul {
+      display: flex;
+      gap: 20px;
+    }
+
+    header nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    header .search-cart {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header .search-cart input {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    header .cart-icon {
+      font-size: 24px;
+      color: white;
+    }
+
+    .main-banner {
+      background-color: #232F3E;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .main-banner h1 {
+      font-size: 50px;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .cta-btn {
+      padding: 15px 30px;
+      background-color: #FF9900; /* Amazon Yellow */
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background-color: #FF7A00;
+    }
+
+    .categories, .featured-products {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .category-item, .product-card {
+      background-color: #fff;
+      padding: 15px;
+      margin: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 5px;
+    }
+
+    .category-item {
+      display: inline-block;
+      background-color: #F3F3F3;
+      padding: 10px 20px;
+      font-size: 18px;
+      font-weight: 500;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .category-item:hover {
+      background-color: #FF9900;
+      color: white;
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    .product-card h3 {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    .product-card .price {
+      font-size: 16px;
+      color: #FF9900;
+      margin: 10px 0;
+    }
+
+    .product-card button {
+      background-color: #FF9900;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .product-card button:hover {
+      background-color: #FF7A00;
+    }
+
+    footer {
+      background-color: #232F3E; /* Dark Gray */
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer .footer-logo {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    footer nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    footer nav ul li a {
+      color: white;
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    footer .social-media a {
+      font-size: 24px;
+      color: white;
+      margin: 0 10px;
+    }
+
+    footer .social-media a:hover {
+      color: #FF9900;
+    }
+
+    /* Sign-Up Form */
+    .signup-container {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 10px 0 0 10px;
+      width: 250px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      color: #232F3E; /* Dark Gray */
+      display: none; /* Hide form initially */
+    }
+
+    .signup-container h2 {
+      text-align: center;
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #232F3E;
+      font-weight: 700;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px 15px;
+      border-radius: 5px;
+      border: 2px solid #ccc;
+      background: #f7f7f7;
+      color: #232F3E;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: #FF9900; /* Amazon Yellow */
+      box-shadow: 0 0 5px rgba(255, 153, 0, 0.6);
+    }
+
+    .signup-btn {
+      width: 100%;
+      padding: 12px;
+      background: #FF9900; /* Amazon Yellow */
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .signup-btn:hover {
+      background: #FF7A00;
+    }
+
+    /* Loading Animation */
+    .loading-overlay {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      width: 250px;
+      height: 100px;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 20;
+      border-radius: 10px 0 0 10px;
+    }
+
+    .loader {
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #FF9900;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="#">SanyamStore</a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="search-cart">
+      <input type="text" placeholder="Search products...">
+      <i class="cart-icon">&#128722;</i>
+    </div>
+  </header>
+
+  <section class="main-banner">
+    <h1>Welcome to SanyamStore</h1>
+    <p>Your favorite destination for shopping</p>
+    <a href="#" class="cta-btn">Shop Now</a>
+  </section>
+
+  <section class="categories">
+    <h2>Shop by Categories</h2>
+    <div class="category-list">
+      <div class="category-item">Electronics</div>
+      <div class="category-item">Fashion</div>
+      <div class="category-item">Home & Kitchen</div>
+      <div class="category-item">Beauty</div>
+    </div>
+  </section>
+
+  <section class="featured-products">
+    <h2>Featured Products</h2>
+    <div class="product-list">
+      <div class="product-card">
+        <img src="https://blaupunktaudio.in/cdn/shop/files/bh41-bluetooth-wireless-over-ear-headphone-blue-1-.0.2.jpg?v=1723532548" alt="Product 1">
+        <h3>Headphones</h3>
+        <p class="price">$299.99</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="https://static.wixstatic.com/media/9edb58_4448c8503d71468fbd04aeea863750c8~mv2.jpg/v1/fill/w_488,h_472,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/9edb58_4448c8503d71468fbd04aeea863750c8~mv2.jpg" alt="Product 2">
+        <h3>Action figure</h3>
+        <p class="price">$149.99</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtQGBaFIJCfkCLqrSi8Xv2gGhwoTdmOTuhxg&s">
+        <h3>Chess Board</h3>
+        <p class="price">$499.99</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dw34d84041/images/Titan/Catalog/1698KM02_1.jpg?sw=600&sh=600" alt="Product 4">
+        <h3>Watch</h3>
+        <p class="price">$129.99</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="data:image/jpeg;base64,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">
+        <h3>Shoes</h3>
+        <p class="price">$249.99</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Loading Animation -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Sign-Up Form -->
+  <div class="signup-container" id="signupForm">
+    <h2>Sign Up</h2>
+    
+    <div class="input-group">
+      <input type="text" id="username" placeholder="Username" />
+    </div>
+
+    <div class="input-group">
+      <input type="email" id="email" placeholder="Email" />
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Password" />
+    </div>
+
+    <button class="signup-btn">Create Account</button>
+
+    <div class="social-login">
+      <a href="#">Google</a>
+      <a href="#">Facebook</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">
+      SanyamStore
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="social-media">
+      <a href="#">&#128100;</a>
+      <a href="#">&#128241;</a>
+      <a href="#">&#128172;</a>
+    </div>
+  </footer>
+
+  <script>
+    // Show the sign-up form after 5-10 seconds
+    setTimeout(function() {
+      document.getElementById('loadingOverlay').style.display = 'none'; // Hide the loading animation
+      document.getElementById('signupForm').style.display = 'block'; // Show the sign-up form
+    }, Math.floor(Math.random() * 5000) + 5000); // Random delay between 5 to 10 seconds
+  </script>
+
+</body>
+</html>
